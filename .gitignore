@@ -1,2 +1,3 @@
+*octave-workspace
 venv
-.DS_store
+*.DS_Store
