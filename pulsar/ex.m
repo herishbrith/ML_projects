@@ -14,7 +14,7 @@ y_train = y_train';
 y_test = y_test';
 
 % Set value of reduced k-dimensons
-reducedDim = 1;
+reducedDim = 3;
 
 % Apply feature normalization and add polynomial features to training dataset
 X_train_poly = polyFeatures(X_train, 5);
@@ -29,11 +29,15 @@ fprintf('Program paused. Hit enter to continue ...\n');
 pause;
 
 K = 2;
-max_iters = 10;
+max_iters = 1;
 
 % When using K-Means, it is important the initialize the centroids
-% randomly.
-initial_centroids = kMeansInitCentroids(X_train_2D, K);
+% randomly, but for our case, since the solution is binary, we have
+% the privilege to assign each of the centroids belonging to
+% different classes
+%initial_centroids = kMeansInitCentroids(X_train_2D, K);
+initial_centroids = [X_train_2D(y_train==0,:)(1,:); ...
+	X_train_2D(y_train==1,:)(1,:)];
 
 % Run K-Means
 [centroids, idx] = runkMeans(X_train_2D, ...
