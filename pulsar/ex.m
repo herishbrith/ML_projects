@@ -14,8 +14,17 @@ y_train = y_train';
 y_cv = y_cv';
 
 % Apply feature normalization and add polynomial features to training dataset
-X_train_poly = polyFeatures(X_train, 5);
+%X_train_poly = polyFeatures(X_train, 5);
+X_train_poly = X_train;
 [X_train_poly, mu, sigma] = featureNormalize(X_train_poly);
+
+% Convert n-dimensions to k-dimensons using PCA
+[U S] = pca(X_train_poly);
+
+plotData(U(:,1:2));
+fprintf('Program paused. Hit enter to continue ...\n');
+pause;
+
 
 % Apply feature normalization and add polynomial features to cv dataset
 X_cv_poly = polyFeatures(X_cv, 5);
