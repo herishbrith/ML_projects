@@ -16,17 +16,21 @@ y_test = y_test';
 % Set value of reduced k-dimensons
 reducedDim = 3;
 
+for dim = 1:reducedDim
+
+dim
+
 % Apply feature normalization and add polynomial features to training dataset
 X_train_poly = polyFeatures(X_train, 5);
 [X_train_poly, mu, sigma] = featureNormalize(X_train_poly);
 
 % Convert n-dimensions to k-dimensons using PCA, for us k is 2
-X_train_2D = convertNToK(X_train_poly, reducedDim);
+X_train_2D = convertNToK(X_train_poly, dim);
 X_train_2D = X_train_poly;
 
 %plot2DData(X_train_2D, y_train);
-fprintf('Program paused. Hit enter to continue ...\n');
-pause;
+%fprintf('Program paused. Hit enter to continue ...\n');
+%pause;
 
 K = 2;
 max_iters = 1;
@@ -48,25 +52,22 @@ X_test_poly = polyFeatures(X_test, 5);
 [X_test_poly, mu, sigma] = featureNormalize(X_test_poly);
 
 % Convert n-dimensions to k-dimensons using PCA, for us k is 2
-X_test_2D = convertNToK(X_test_poly, reducedDim);
+X_test_2D = convertNToK(X_test_poly, dim);
 X_test_2D = X_test_poly;
 
 %plot2DData(X_test_2D(1:1000,:), y_test(1:1000), centroids);
-fprintf('Program paused. Hit enter to continue ...\n');
-pause;
+%fprintf('Program paused. Hit enter to continue ...\n');
+%pause;
 
 % Predict the classes of test dataset
 pred = findClosestCentroids(X_test_2D, centroids);
 pred(pred==1) = 0;
 pred(pred==2) = 1;
 
-pred(500:525,:), y_test(500:525,:)
-
 % Check for accuracy, precision and recall on cv set
 fprintf('\nCV setAccuracy: %f\n', mean(double(pred == y_test)) * 100);
 
-
-
+end
 
 
 
