@@ -10,4 +10,4 @@
 #### 2. Octave is a must required
 #### 3. cd into "Pulsar-Identification/pulsar/" and run octave ex.m
 
-![alt text](https://drive.google.com/file/d/0B9u6EUpFotHlQ0xwOWhLS2RBdVk)
+![alt text](./pulsar/2D_representation_of_HTRU.png)
